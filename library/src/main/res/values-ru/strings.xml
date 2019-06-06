@@ -1,0 +1,22 @@
+<resources>
+    <string name="picker_title">Выберите местоположение</string>
+    <string name="picker_search_this">Искать здесь</string>
+    <string name="picker_or_select_nearby">Или выберите бизнес поблизости</string>
+    <string name="picker_load_places_error">Не удалось загрузить места поблизости…</string>
+    <string name="picker_load_this_place_error">Не удалось найти это место…</string>
+    <string name="picker_load_search_results_error">Не удалось загрузить результаты поиска…</string>
+    <string name="picker_place_confirm">Использовать это место?</string>
+    <string name="picker_place_confirm_cancel">Изменить</string>
+    <string name="picker_confirm_this_location">Подтвердить</string>
+    <string name="picker_addr">Адрес: %1$s</string>
+    <string name="picker_no_results">No Results</string>
+
+    <!-- Content descriptions -->
+    <string name="description_place_image">Фотография выбранного местоположения</string>
+    <string name="description_place_map">Фрагмент карты выбранного местоположения</string>
+
+    <!-- Errors -->
+    <string name="network_error_message">Сетевая ошибка</string>
+    <string name="remote_error_message">Ошибка сервера</string>
+    <string name="unknown_error_message">Неизвестная ошибка</string>
+</resources>
