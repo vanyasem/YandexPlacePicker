@@ -34,24 +34,34 @@ Sign up for MapKit API keys - [How to](https://tech.yandex.com/maps/mapkit/doc/3
 
 Check the [sample](https://github.com/vanyasem/YandexPlacePicker/tree/master/sample) project for a full working example.
 
-### - Java
+### Java
 ```java
     private void showPlacePicker() {
-		YandexPlacePicker.IntentBuilder builder = new YandexPlacePicker.IntentBuilder();
-		builder.setYandexMapsKey("YOUR_MAPKIT_API_KEY");
-		Intent placeIntent = builder.build(getChildActivity());
-		startActivityForResult(placeIntent, REQUEST_PLACE_PICKER);
+        YandexPlacePicker.IntentBuilder builder = new YandexPlacePicker.IntentBuilder();
+        builder.setYandexMapsKey("YOUR_MAPKIT_API_KEY");
+        Intent placeIntent = builder.build(getActivity());
+        startActivityForResult(placeIntent, REQUEST_PLACE_PICKER);
     }
     
     @Override  
     public void onActivityResult(int requestCode, int resultCode, Intent data) {  
         if ((requestCode == REQUEST_PLACE_PICKER)) {  
-            PlaceParcelable place = YandexPlacePicker.getPlace(data);
-	    if (place != null) {  
-                Toast.makeText(this, "You selected the place: " + place.getName(), Toast.LENGTH_SHORT).show();
-            }  
+            if(data != null) {
+                PlaceParcelable place = YandexPlacePicker.getPlace(data);
+                Toast.makeText(this, "You selected: " + place.getName(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
+```
+
+## Configuration
+
+You can alter the behavior of the picker by editing `config.xml`.
+
+```xml  
+<bool name="show_confirmation_dialog">true</bool>
+
+<integer name="default_zoom">17</integer>
 ```
  
 ## License

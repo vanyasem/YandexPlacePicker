@@ -102,6 +102,8 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
     private Toolbar mToolbar;
     private AppBarLayout mAppBarLayout;
 
+    private float mDefaultZoom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MapKitFactory.setApiKey(YandexPlacePicker.yandexMapsKey);
@@ -146,6 +148,9 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
         mMapView.getMap().move(new CameraPosition(new Point(55.6842731688303, 37.6219312108), 4.716611f, 0, 0));
         mMapView.getMap().addCameraListener(this);
 
+        // Sets the default zoom
+        mDefaultZoom = getResources().getInteger(R.integer.default_zoom);
+
         // Initialize the UI
         initializeUi();
 
@@ -158,7 +163,7 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
         // Use the last know location to point the map to
         mLastLocation = LocationManagerUtils.getLastKnownLocation();
         if(mLastLocation != null) {
-            animateCamera(mLastLocation.getPosition(), 17);
+            animateCamera(mLastLocation.getPosition(), mDefaultZoom);
             loadNearbyPlaces();
         }
     }
@@ -277,9 +282,9 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
 
                 // Set the map's camera position to the current location of the device
                 if (animate)
-                    animateCamera(location.getPosition(), 17);
+                    animateCamera(location.getPosition(), mDefaultZoom);
                 else
-                    moveCamera(location.getPosition(), 17);
+                    moveCamera(location.getPosition(), mDefaultZoom);
 
                 // Load the places near this location
                 loadNearbyPlaces();
@@ -426,8 +431,12 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
     }
 
     private void showConfirmPlacePopup(GeoObject place) {
-        PlaceConfirmDialogFragment fragment = PlaceConfirmDialogFragment.newInstance(place, this);
-        fragment.show(getSupportFragmentManager(), DIALOG_CONFIRM_PLACE_TAG);
+        if (getResources().getBoolean(R.bool.show_confirmation_dialog)) {
+            PlaceConfirmDialogFragment fragment = PlaceConfirmDialogFragment.newInstance(place, this);
+            fragment.show(getSupportFragmentManager(), DIALOG_CONFIRM_PLACE_TAG);
+        } else {
+            onPlaceConfirmed(new PlaceParcelable(place));
+        }
     }
 
     @Override

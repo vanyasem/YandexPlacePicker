@@ -4,4 +4,8 @@
     <!-- Do not change this one -->
     <bool name="show_card_search">true</bool>
 
+    <bool name="show_confirmation_dialog">true</bool>
+
+    <integer name="default_zoom">17</integer>
+
 </resources>
