@@ -11,6 +11,8 @@ Google Maps SDK used to feature a Place Picker. It was deprecated and removed. T
 
 Different than Google's Place Picker, PING **doesn't** search for places according to where the user is pointing the map to. Instead, the user is required to manually press the *Search this location* button.
 
+There is a capability to utilize icons, but Google's icon names differ from Yandex's (and there isn't a full list anywhere to find), which requires manual renaming of all the icons. A few of them (banks, for example) are included. Feel free to contribute with more icons.
+
 ## Download
 
 Add Jitpack in your root build.gradle at the end of repositories:
