@@ -1,7 +1,7 @@
 # Yandex Place Picker
 [![](https://jitpack.io/v/vanyasem/YandexPlacePicker.svg)](https://jitpack.io/#vanyasem/YandexPlacePicker)
 
-Google Maps SDK used to feature a Place Picker. It was deprecated and removed. There is a custom library called [PING](https://raw.githubusercontent.com/rtchagas/pingplacepicker) that implements similar functionality using the Geocoder API. **It's expensive.**
+Google Maps SDK used to feature a Place Picker. It was deprecated and removed. There is a custom library called [PING](https://github.com/rtchagas/pingplacepicker) that implements similar functionality using the Geocoder API. **It's expensive.**
 
 **Yandex Place Picker** is based on Yandex MapKit, and provides you with the same functionality. At no cost.
 
