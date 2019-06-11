@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Yandex Place Picker</string>
+    <string name="show_picker">Show picker</string>
 </resources>
