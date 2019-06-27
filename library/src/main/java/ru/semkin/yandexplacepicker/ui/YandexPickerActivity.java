@@ -340,7 +340,7 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
 
     private void showAddrButton(GeoObject place) {
         mTextLocation.setVisibility(View.VISIBLE);
-        mTextLocation.setText(getString(R.string.picker_addr, place.getName()));
+        mTextLocation.setText(place.getName());
 
         mTextLocationSelect.setText(R.string.picker_confirm_this_location);
 
@@ -402,19 +402,33 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
     private void bindPlaces(List<GeoObjectCollection.Item> places) {
         // Bind to the recycler view
         if(mPlaceAdapter == null) {
-            mPlaceAdapter = new PlacePickerAdapter(places, this::showConfirmPlacePopup);
+            mPlaceAdapter = new PlacePickerAdapter(places, false, onPlaceListener);
         } else {
             mPlaceAdapter.swapData(places);
         }
         mRecyclerNearby.setAdapter(mPlaceAdapter);
 
-        // Bind to the map
-        mMapObjects.clear();
-        for (GeoObjectCollection.Item collectionItem : places) {
-            GeoObject place = collectionItem.getObj();
-            addMarker(place);
+        if (getResources().getBoolean(R.bool.show_pins_on_map)) {
+            // Bind to the map
+            mMapObjects.clear();
+            for (GeoObjectCollection.Item collectionItem : places) {
+                GeoObject place = collectionItem.getObj();
+                addMarker(place);
+            }
         }
     }
+
+    PlacePickerAdapter.OnPlaceListener onPlaceListener = new PlacePickerAdapter.OnPlaceListener() {
+        @Override
+        public void onPlaceSelected(GeoObject place) {
+            showConfirmPlacePopup(place);
+        }
+
+        @Override
+        public void onPlacePreviewed(GeoObject place) {
+            animateCamera(place.getGeometry().get(0).getPoint(), mDefaultZoom);
+        }
+    };
 
     private PlacemarkMapObject addMarker(GeoObject place) {
         Point point = place.getGeometry().get(0).getPoint();
@@ -496,8 +510,16 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
     }
 
     @Override
-    public void onCameraPositionChanged(@NonNull Map map, @NonNull CameraPosition cameraPosition, @NonNull CameraUpdateSource cameraUpdateSource, boolean b) {
-        if(cameraUpdateSource == CameraUpdateSource.GESTURES)
-            hideAddrButton();
+    public void onCameraPositionChanged(@NonNull Map map, @NonNull CameraPosition cameraPosition, @NonNull CameraUpdateSource cameraUpdateSource, boolean finished) {
+        if (cameraUpdateSource == CameraUpdateSource.GESTURES) {
+            if (getResources().getBoolean(R.bool.search_on_scroll)) {
+                if(finished)
+                    selectThisPlace();
+            }
+            else {
+                hideAddrButton();
+            }
+        }
+
     }
 }

@@ -9,8 +9,6 @@ Google Maps SDK used to feature a Place Picker. It was deprecated and removed. T
 
 ## A key difference
 
-Different than Google's Place Picker, PING **doesn't** search for places according to where the user is pointing the map to. Instead, the user is required to manually press the *Search this location* button.
-
 There is a capability to utilize icons, but Google's icon names differ from Yandex's (and there isn't a full list anywhere to find), which requires manual renaming of all the icons. A few of them (banks, for example) are included. Feel free to contribute with more icons.
 
 ## Download
@@ -62,6 +60,12 @@ You can alter the behavior of the picker by editing `config.xml`.
 
 ```xml  
 <bool name="show_confirmation_dialog">true</bool>
+
+<bool name="show_confirmation_buttons">false</bool>
+
+<bool name="show_pins_on_map">true</bool>
+
+<bool name="search_on_scroll">false</bool>
 
 <integer name="default_zoom">17</integer>
 ```

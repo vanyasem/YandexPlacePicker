@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -97,7 +96,7 @@ public class SearchActivity extends AppCompatActivity implements Session.SearchL
     @Override
     public void onSearchResponse(@NonNull Response response) {
         if(mPlaceAdapter == null) {
-            mPlaceAdapter = new PlacePickerAdapter(response.getCollection().getChildren(), this::showConfirmPlacePopup);
+            mPlaceAdapter = new PlacePickerAdapter(response.getCollection().getChildren(), true, onPlaceListener);
         } else {
             mPlaceAdapter.swapData(response.getCollection().getChildren());
         }
@@ -150,6 +149,16 @@ public class SearchActivity extends AppCompatActivity implements Session.SearchL
         Geometry geometry = Geometry.fromBoundingBox(BOUNDING_BOX);
         mSearchManager.submit(query, geometry, SEARCH_OPTIONS, this);
     }
+
+    PlacePickerAdapter.OnPlaceListener onPlaceListener = new PlacePickerAdapter.OnPlaceListener() {
+        @Override
+        public void onPlaceSelected(GeoObject place) {
+            showConfirmPlacePopup(place);
+        }
+
+        @Override
+        public void onPlacePreviewed(GeoObject place) { }
+    };
 
     private void showConfirmPlacePopup(GeoObject place) {
         PlaceConfirmDialogFragment fragment = PlaceConfirmDialogFragment.newInstance(place, this);

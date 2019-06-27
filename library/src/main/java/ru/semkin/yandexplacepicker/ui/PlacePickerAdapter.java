@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.yandex.mapkit.GeoObject;
 import com.yandex.mapkit.GeoObjectCollection;
 
@@ -18,13 +19,15 @@ import ru.semkin.yandexplacepicker.R;
 
 public class PlacePickerAdapter  extends RecyclerView.Adapter<PlacePickerAdapter.PlaceViewHolder> {
 
-    public PlacePickerAdapter(List<GeoObjectCollection.Item> places, OnPlaceSelected listener) {
+    public PlacePickerAdapter(List<GeoObjectCollection.Item> places, boolean search, OnPlaceListener listener) {
         mPlaceList = places;
         mClickListener = listener;
+        mSearch = search;
     }
 
     private List<GeoObjectCollection.Item> mPlaceList;
-    private OnPlaceSelected mClickListener;
+    private OnPlaceListener mClickListener;
+    private boolean mSearch;
 
     @NonNull
     @Override
@@ -52,23 +55,42 @@ public class PlacePickerAdapter  extends RecyclerView.Adapter<PlacePickerAdapter
         ImageView ivPlaceType;
         TextView tvPlaceName;
         TextView tvPlaceAddress;
+        MaterialButton btnSelect;
 
         private PlaceViewHolder(View itemView) {
             super(itemView);
             ivPlaceType = itemView.findViewById(R.id.ivPlaceType);
             tvPlaceName = itemView.findViewById(R.id.tvPlaceName);
             tvPlaceAddress = itemView.findViewById(R.id.tvPlaceAddress);
+            btnSelect = itemView.findViewById(R.id.btnSelect);
+
         }
 
-        public void bind(GeoObject place, OnPlaceSelected listener) {
-            itemView.setOnClickListener(v -> listener.onPlaceSelected(place));
-            ivPlaceType.setImageResource(UiUtils.getPlaceDrawableRes(itemView.getContext(), place));
+        public void bind(GeoObject place, OnPlaceListener listener) {
+            // Hide or show place icons according to the config
+            if (itemView.getContext().getResources().getBoolean(R.bool.show_place_icons)) {
+                ivPlaceType.setImageResource(UiUtils.getPlaceDrawableRes(itemView.getContext(), place));
+            } else {
+                ivPlaceType.setVisibility(View.GONE);
+            }
+
+            // Hide or show the select button according to the config
+            if (itemView.getContext().getResources().getBoolean(R.bool.show_confirmation_buttons) &&
+                    !mSearch) {
+                btnSelect.setVisibility(View.VISIBLE);
+                btnSelect.setOnClickListener(v -> listener.onPlaceSelected(place));
+                itemView.setOnClickListener(v -> listener.onPlacePreviewed(place));
+            } else {
+                itemView.setOnClickListener(v -> listener.onPlaceSelected(place));
+            }
+
             tvPlaceName.setText(place.getName());
             tvPlaceAddress.setText(place.getDescriptionText());
         }
     }
 
-    interface OnPlaceSelected {
+    interface OnPlaceListener {
         void onPlaceSelected(GeoObject place);
+        void onPlacePreviewed(GeoObject place);
     }
 }

@@ -38,11 +38,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tint="@color/colorPrimary"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/tvPlaceAddress"
             app:layout_constraintStart_toStartOf="@id/gdMarginStart"
             app:layout_constraintTop_toTopOf="@+id/tvPlaceName"
             app:srcCompat="@drawable/ic_map_marker_black_24dp"
-            tools:ignore="ContentDescription"/>
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvPlaceName"
@@ -52,8 +54,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintEnd_toEndOf="@id/gdMarginEnd"
-            app:layout_constraintStart_toStartOf="@id/gdContent"
+            app:layout_constraintEnd_toStartOf="@id/btnSelect"
+            app:layout_constraintStart_toEndOf="@id/ivPlaceType"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Eiffel Tower"/>
 
@@ -67,9 +69,20 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="?android:textColorSecondary"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/gdMarginEnd"
+            app:layout_constraintEnd_toStartOf="@id/btnSelect"
             app:layout_constraintStart_toStartOf="@+id/tvPlaceName"
             app:layout_constraintTop_toBottomOf="@+id/tvPlaceName"
             tools:text="Champ de Mars, Avenue Anatole France, Paris, France"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/picker_select_this_location"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/gdMarginEnd"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

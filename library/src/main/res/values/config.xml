@@ -6,6 +6,14 @@
 
     <bool name="show_confirmation_dialog">true</bool>
 
+    <bool name="show_confirmation_buttons">false</bool>
+
+    <bool name="show_pins_on_map">true</bool>
+
+    <bool name="show_place_icons">true</bool>
+
+    <bool name="search_on_scroll">false</bool>
+
     <integer name="default_zoom">17</integer>
 
 </resources>

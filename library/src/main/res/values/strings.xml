@@ -10,8 +10,7 @@
     <string name="picker_place_confirm">Use this place?</string>
     <string name="picker_place_confirm_cancel">Change location</string>
     <string name="picker_confirm_this_location">Confirm this location</string>
-    <string name="picker_addr">Address: %1$s</string>
-    <string name="picker_no_results">No Results</string>
+    <string name="picker_select_this_location">Select</string>
 
     <!-- Content descriptions -->
     <string name="description_place_image">A photo of the selected place</string>
