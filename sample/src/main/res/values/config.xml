@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="show_confirmation_dialog">false</bool>
+    <bool name="show_confirmation_buttons">true</bool>
+    <bool name="show_pins_on_map">false</bool>
+    <bool name="show_place_icons">false</bool>
+    <bool name="search_on_scroll">true</bool>
+
+</resources>
