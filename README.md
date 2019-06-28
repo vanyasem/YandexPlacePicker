@@ -3,7 +3,7 @@
 
 Google Maps SDK used to feature a Place Picker. It was deprecated and removed. There is a custom library called [PING](https://github.com/rtchagas/pingplacepicker) that implements similar functionality using the Geocoder API. **It's expensive.**
 
-**Yandex Place Picker** is based on [PING](https://github.com/rtchagas/pingplacepicker), and provides you with the same functionality utilising Yandex MapKit. At no cost.
+**Yandex Place Picker** is partially based on [PING](https://github.com/rtchagas/pingplacepicker), and provides you with the same functionality utilising Yandex MapKit. At no cost.
 
 <img src="images/screenshot_1.png" alt="Map expanded" width="210"/> <img src="images/screenshot_2.png" alt="Place selected" width="210"/> <img src="images/screenshot_3.png" alt="Results expanded" width="210"/> <img src="images/screenshot_4.png" alt="Search result" width="210"/>
 

@@ -25,6 +25,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -92,6 +93,7 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
     private PlacePickerAdapter mPlaceAdapter;
 
     private CoordinatorLayout mCoordinator;
+    private NestedScrollView mScrollPlaces;
     private ImageButton mButtonLocation;
     private MaterialCardView mCardSearch;
     private ImageView mImageMarker;
@@ -118,6 +120,7 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
         mMapView.getMap().getLogo().setAlignment(new Alignment(HorizontalAlignment.LEFT, VerticalAlignment.BOTTOM));
 
         mCoordinator = findViewById(R.id.coordinator);
+        mScrollPlaces = findViewById(R.id.svPlaces);
         mRecyclerNearby = findViewById(R.id.rvNearbyPlaces);
         mButtonLocation = findViewById(R.id.btnMyLocation);
         mCardSearch = findViewById(R.id.cardSearch);
@@ -269,7 +272,10 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
     }
 
     private void measure(CoordinatorLayout.LayoutParams appBarLayoutParams, View view) {
-        appBarLayoutParams.height = (view.getHeight() * 85) / 100;
+        if (getResources().getBoolean(R.bool.show_confirmation_buttons))
+            appBarLayoutParams.height = (view.getHeight() * 68) / 100;
+        else
+            appBarLayoutParams.height = (view.getHeight() * 85) / 100;
     }
 
     private LocationListener mLocationListener;
@@ -427,8 +433,21 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
         @Override
         public void onPlacePreviewed(GeoObject place) {
             animateCamera(place.getGeometry().get(0).getPoint(), mDefaultZoom);
+            showAddrButton(place);
+            collapseToolbar();
         }
     };
+
+    private void collapseToolbar() {
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
+
+        mScrollPlaces.scrollTo(0, 0);
+
+        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+        if(behavior != null) {
+            behavior.setTopAndBottomOffset(0);
+        }
+    }
 
     private PlacemarkMapObject addMarker(GeoObject place) {
         Point point = place.getGeometry().get(0).getPoint();
