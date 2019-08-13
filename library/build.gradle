@@ -31,6 +31,6 @@ dependencies {
     implementation 'com.github.mcginty:material-colors:1.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.yandex.android:mapkit:3.3.1'
-    implementation 'com.yandex.android:search:3.3.1'
+    implementation 'com.yandex.android:mapkit:3.4.0'
+    implementation 'com.yandex.android:search:3.4.0'
 }
