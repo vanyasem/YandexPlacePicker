@@ -136,9 +136,9 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Construct a UserLocationLayer
-        mUserLocationLayer = mMapView.getMap().getUserLocationLayer();
-        mUserLocationLayer.setEnabled(true);
+        mUserLocationLayer = MapKitFactory.getInstance().createUserLocationLayer(mMapView.getMapWindow());
         mUserLocationLayer.setObjectListener(this);
+        mUserLocationLayer.setVisible(true);
 
         // Construct a MapObjects
         mMapObjects = mMapView.getMap().getMapObjects().addCollection();
@@ -323,13 +323,13 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
     @Override
     public void onResume() {
         super.onResume();
-        mUserLocationLayer.setEnabled(true);
+        mLocationManager.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mUserLocationLayer.setEnabled(false);
+        mLocationManager.suspend();
     }
 
     private void animateCamera(Point point, float zoom) {
