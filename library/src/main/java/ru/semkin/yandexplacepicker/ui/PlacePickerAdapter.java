@@ -26,8 +26,8 @@ public class PlacePickerAdapter  extends RecyclerView.Adapter<PlacePickerAdapter
     }
 
     private List<GeoObjectCollection.Item> mPlaceList;
-    private OnPlaceListener mClickListener;
-    private boolean mSearch;
+    private final OnPlaceListener mClickListener;
+    private final boolean mSearch;
 
     @NonNull
     @Override
@@ -52,10 +52,10 @@ public class PlacePickerAdapter  extends RecyclerView.Adapter<PlacePickerAdapter
     }
 
     class PlaceViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivPlaceType;
-        TextView tvPlaceName;
-        TextView tvPlaceAddress;
-        MaterialButton btnSelect;
+        final ImageView ivPlaceType;
+        final TextView tvPlaceName;
+        final TextView tvPlaceAddress;
+        final MaterialButton btnSelect;
 
         private PlaceViewHolder(View itemView) {
             super(itemView);
@@ -66,7 +66,7 @@ public class PlacePickerAdapter  extends RecyclerView.Adapter<PlacePickerAdapter
 
         }
 
-        public void bind(GeoObject place, OnPlaceListener listener) {
+        void bind(GeoObject place, OnPlaceListener listener) {
             // Hide or show place icons according to the config
             if (itemView.getContext().getResources().getBoolean(R.bool.show_place_icons)) {
                 ivPlaceType.setImageResource(UiUtils.getPlaceDrawableRes(itemView.getContext(), place));

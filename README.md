@@ -13,7 +13,7 @@ There is a capability to utilize icons, but Google's icon names differ from Yand
 
 ## Download
 
-Add Jitpack in your root build.gradle at the end of repositories:
+Add JitPack in your root build.gradle at the end of repositories:
 
 	allprojects {
 		repositories {

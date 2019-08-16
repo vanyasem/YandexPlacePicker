@@ -12,7 +12,7 @@ public class YandexPlacePicker {
 
     public static class IntentBuilder {
 
-        private Intent intent = new Intent();
+        private final Intent intent = new Intent();
 
         public IntentBuilder setYandexMapsKey(String mapsKey) {
             yandexMapsKey = mapsKey;

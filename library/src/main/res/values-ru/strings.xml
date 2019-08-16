@@ -3,7 +3,6 @@
     <string name="picker_search_this">Искать здесь</string>
     <string name="picker_or_select_nearby">Или выберите бизнес поблизости</string>
     <string name="picker_load_places_error">Не удалось загрузить места поблизости…</string>
-    <string name="picker_load_this_place_error">Не удалось найти это место…</string>
     <string name="picker_load_search_results_error">Не удалось загрузить результаты поиска…</string>
     <string name="picker_place_confirm">Использовать это место?</string>
     <string name="picker_place_confirm_cancel">Изменить</string>

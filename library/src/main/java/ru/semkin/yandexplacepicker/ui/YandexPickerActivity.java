@@ -239,12 +239,9 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
         mCardSearch.setVisibility(visibility);
 
         // Add a nice fade effect to toolbar
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                mToolbar.setAlpha(Math.abs(verticalOffset / (float) appBarLayout.getTotalScrollRange()));
-            }
-        });
+        mAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
+                mToolbar.setAlpha(Math.abs(verticalOffset / (float) appBarLayout.getTotalScrollRange()))
+        );
         // Set default behavior
         CoordinatorLayout.LayoutParams appBarLayoutParams = (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         appBarLayoutParams.setBehavior(new AppBarLayout.Behavior());
@@ -364,11 +361,13 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
         mTextLocationSelect.setOnClickListener(v -> selectThisPlace());
     }
 
-    private Session.SearchListener mSearchNearbyListener = new Session.SearchListener() {
+    private final Session.SearchListener mSearchNearbyListener = new Session.SearchListener() {
         @Override
         public void onSearchResponse(@NonNull Response response) {
-            showAddrButton(response.getMetadata().getToponym());
-
+            GeoObject toponym = response.getMetadata().getToponym();
+            if(toponym != null) {
+                showAddrButton(toponym);
+            }
             if(response.getCollection().getChildren().size() > 0) {
                 bindPlaces(response.getCollection().getChildren());
             }
@@ -419,12 +418,14 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
             mMapObjects.clear();
             for (GeoObjectCollection.Item collectionItem : places) {
                 GeoObject place = collectionItem.getObj();
-                addMarker(place);
+                if(place != null) {
+                    addMarker(place);
+                }
             }
         }
     }
 
-    PlacePickerAdapter.OnPlaceListener onPlaceListener = new PlacePickerAdapter.OnPlaceListener() {
+    private final PlacePickerAdapter.OnPlaceListener onPlaceListener = new PlacePickerAdapter.OnPlaceListener() {
         @Override
         public void onPlaceSelected(GeoObject place) {
             showConfirmPlacePopup(place);
@@ -451,10 +452,13 @@ public class YandexPickerActivity extends AppCompatActivity implements UserLocat
 
     private PlacemarkMapObject addMarker(GeoObject place) {
         Point point = place.getGeometry().get(0).getPoint();
-        PlacemarkMapObject placemark = mMapObjects.addPlacemark(point, getPlaceMarkerBitmap(place));
-        placemark.setUserData(place);
-        placemark.addTapListener(this);
-        return placemark;
+        if(point != null) {
+            PlacemarkMapObject placemark = mMapObjects.addPlacemark(point, getPlaceMarkerBitmap(place));
+            placemark.setUserData(place);
+            placemark.addTapListener(this);
+            return placemark;
+        }
+        return null;
     }
 
     @Override

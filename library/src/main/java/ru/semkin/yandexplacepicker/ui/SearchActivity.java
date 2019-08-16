@@ -150,7 +150,7 @@ public class SearchActivity extends AppCompatActivity implements Session.SearchL
         mSearchManager.submit(query, geometry, SEARCH_OPTIONS, this);
     }
 
-    PlacePickerAdapter.OnPlaceListener onPlaceListener = new PlacePickerAdapter.OnPlaceListener() {
+    private final PlacePickerAdapter.OnPlaceListener onPlaceListener = new PlacePickerAdapter.OnPlaceListener() {
         @Override
         public void onPlaceSelected(GeoObject place) {
             showConfirmPlacePopup(place);

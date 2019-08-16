@@ -36,8 +36,7 @@ public class PlaceParcelable implements Parcelable {
         mLng = point.getLongitude();
     }
 
-    public PlaceParcelable() {
-    }
+    public PlaceParcelable() { }
 
     @Override
     public int describeContents() {

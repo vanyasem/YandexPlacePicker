@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.yandex.mapkit.GeoObject;
@@ -53,6 +53,7 @@ public class PlaceConfirmDialogFragment extends AppCompatDialogFragment {
         mPlace = getArguments().getParcelable(ARG_PLACE);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -117,7 +118,7 @@ public class PlaceConfirmDialogFragment extends AppCompatDialogFragment {
         loadImage(image, url);
     }
 
-    public static void loadImage(final ImageView view, String urlImage) {
+    private static void loadImage(final ImageView view, String urlImage) {
         try {
             RequestCreator request = Picasso.get().load(urlImage);
             request.into(view);
