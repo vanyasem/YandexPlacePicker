@@ -10,7 +10,7 @@ public class PlaceParcelable implements Parcelable {
 
     private String mName;
     private String mAddress;
-    private double mLat;
+    private double mLat; // TODO: I guess it would be useful to use the new PointParcelable here
     private double mLng;
 
     @Override
