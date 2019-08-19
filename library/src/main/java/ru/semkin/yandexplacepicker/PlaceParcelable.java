@@ -63,7 +63,7 @@ public class PlaceParcelable implements Parcelable {
         return mAddress;
     }
 
-    public Point getPoint() {
-        return new Point(mLat, mLng);
+    public PointParcelable getPoint() {
+        return new PointParcelable(mLat, mLng);
     }
 }
