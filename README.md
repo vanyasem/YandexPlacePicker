@@ -25,7 +25,7 @@ Add JitPack in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.vanyasem:YandexPlacePicker:1.1.3'
+	        implementation 'com.github.vanyasem:YandexPlacePicker:1.1.4'
 	}
 
  ## Hands on
