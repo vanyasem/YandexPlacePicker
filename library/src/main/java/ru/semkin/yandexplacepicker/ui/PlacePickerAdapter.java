@@ -81,6 +81,7 @@ public class PlacePickerAdapter  extends RecyclerView.Adapter<PlacePickerAdapter
                 btnSelect.setOnClickListener(v -> listener.onPlaceSelected(place));
                 itemView.setOnClickListener(v -> listener.onPlacePreviewed(place));
             } else {
+                btnSelect.setVisibility(View.GONE);
                 itemView.setOnClickListener(v -> listener.onPlaceSelected(place));
             }
 
