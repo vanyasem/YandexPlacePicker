@@ -10,30 +10,28 @@ public class PlaceParcelable implements Parcelable {
 
     private String mName;
     private String mAddress;
-    private double mLat; // TODO: I guess it would be useful to use the new PointParcelable here
-    private double mLng;
+    private PointParcelable mPoint;
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mName);
         dest.writeString(mAddress);
-        dest.writeDouble(mLat);
-        dest.writeDouble(mLng);
+        dest.writeParcelable(mPoint, 0);
     }
 
     private PlaceParcelable(Parcel in) {
         mName = in.readString();
         mAddress = in.readString();
-        mLat = in.readDouble();
-        mLng = in.readDouble();
+        mPoint = in.readParcelable(PointParcelable.class.getClassLoader());
     }
 
     public PlaceParcelable(GeoObject place) {
         mName = place.getName();
         mAddress = place.getDescriptionText();
         Point point = place.getGeometry().get(0).getPoint();
-        mLat = point.getLatitude();
-        mLng = point.getLongitude();
+        if(point != null) {
+            mPoint = new PointParcelable(point);
+        }
     }
 
     public PlaceParcelable() { }
@@ -64,6 +62,6 @@ public class PlaceParcelable implements Parcelable {
     }
 
     public PointParcelable getPoint() {
-        return new PointParcelable(mLat, mLng);
+        return mPoint;
     }
 }

@@ -3,6 +3,8 @@ package ru.semkin.yandexplacepicker;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.yandex.mapkit.geometry.Point;
+
 public class PointParcelable implements Parcelable {
 
     private double mLatitude;
@@ -17,6 +19,11 @@ public class PointParcelable implements Parcelable {
     private PointParcelable(Parcel in) {
         mLatitude = in.readDouble();
         mLongitude = in.readDouble();
+    }
+
+    public PointParcelable(Point point) {
+        this.mLatitude = point.getLatitude();
+        this.mLongitude = point.getLongitude();
     }
 
     public PointParcelable(double latitude, double longitude) {
