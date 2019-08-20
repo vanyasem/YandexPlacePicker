@@ -70,6 +70,12 @@ You can alter the behavior of the picker by editing `config.xml`.
 <bool name="search_on_scroll">false</bool>
 
 <integer name="default_zoom">17</integer>
+
+<!-- Marker type
+ EN Docs: https://tech.yandex.com/maps/staticapi/doc/1.x/dg/concepts/markers-docpage/
+ RU Docs: https://tech.yandex.ru/maps/staticapi/doc/1.x/dg/concepts/markers-docpage/
+ -->
+<string name="confirmation_marker" translatable="false">org</string>
 ```
  
 ## License

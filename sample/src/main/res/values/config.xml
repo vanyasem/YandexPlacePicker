@@ -6,5 +6,6 @@
     <bool name="show_pins_on_map">false</bool>
     <bool name="show_place_icons">false</bool>
     <bool name="search_on_scroll">true</bool>
+    <string name="confirmation_marker" translatable="false">org</string>
 
 </resources>

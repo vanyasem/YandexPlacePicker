@@ -111,8 +111,9 @@ public class PlaceConfirmDialogFragment extends AppCompatDialogFragment {
                 + "&"
                 + "l=map"
                 + "&"
+                + "pt=" + mPlace.getPoint().getLongitude() + "," + mPlace.getPoint().getLatitude() + "," + getResources().getString(R.string.confirmation_marker)
+                + "&"
                 + "lang=" + lang;
-        //+ "key=\(Storage.ymkKey)";
 
         ImageView image = content.findViewById(R.id.ivPlaceMap);
         loadImage(image, url);

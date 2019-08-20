@@ -16,4 +16,10 @@
 
     <integer name="default_zoom">17</integer>
 
+    <!-- Confirmation dialog map marker type
+     EN Docs: https://tech.yandex.com/maps/staticapi/doc/1.x/dg/concepts/markers-docpage/
+     RU Docs: https://tech.yandex.ru/maps/staticapi/doc/1.x/dg/concepts/markers-docpage/
+     -->
+    <string name="confirmation_marker" translatable="false">org</string>
+
 </resources>
