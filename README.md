@@ -80,7 +80,7 @@ You can alter the behavior of the picker by editing `config.xml`.
  
 ## License
 
-Copyright 2019 Ivan Semkin
+Copyright 2019-2020 Ivan Semkin
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
